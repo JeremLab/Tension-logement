@@ -177,7 +177,7 @@ Vous pouvez créer un petit jeu de test comme ceci :
 ## 📂 Structure du projet
 
 ```
-tension-logements-crous/
+tension-logements/
 │
 ├── app.R                                    # Application Shiny
 ├── README.md                                # Ce fichier
