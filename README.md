@@ -5,165 +5,172 @@
 [![R](https://img.shields.io/badge/R-4.0%2B-blue.svg)](https://www.r-project.org/)
 [![Shiny](https://img.shields.io/badge/Shiny-1.7%2B-brightgreen.svg)](https://shiny.rstudio.com/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-demo-orange.svg)]()
+
+---
+
+## 💡 À propos de ce projet
+
+**Ce dépôt est une démonstration du travail réalisé.**
+
+- 🎯 **Objectif principal** : Montrer ce qui a été développé pour le Crous Lille
+- 📂 Le **code source complet** est fourni pour que vous puissiez le tester
+- ❌ Les **données réelles** ne sont **pas incluses** (confidentielles)
+- ✅ **Tout le monde peut l'utiliser** pour tester l'application avec ses propres données
+
+**Vous voulez tester l'application ?**  
+Créez simplement un fichier Excel avec vos données (format détaillé ci-dessous) et lancez l'application !
 
 ---
 
 ## 📋 Table des matières
 
-- [À propos](#à-propos)
-- [Fonctionnalités](#fonctionnalités)
-- [Captures d'écran](#captures-décran)
-- [Prérequis](#prérequis)
-- [Installation](#installation)
-- [Utilisation](#utilisation)
-- [Structure du projet](#structure-du-projet)
-- [Optimisations techniques](#optimisations-techniques)
-- [Licence](#licence)
-- [Auteur](#auteur)
-
----
-
-## 📖 À propos
-
-Cette application permet au Crous Lille Nord-Pas de Calais de :
-- **Visualiser** la tension locative par secteur géographique et par résidence
-- **Analyser** l'évolution des demandes et de l'offre de logements sur plusieurs années
-- **Optimiser** la gestion du parc de logements étudiants
-- **Piloter** les décisions stratégiques grâce à des indicateurs clés
-
-### Contexte
-
-Développée en 2025 dans le cadre d'un stage au Crous Lille Nord-Pas de Calais, cette application répond aux besoins de suivi et d'analyse de la tension locative sur l'ensemble des 13 secteurs géographiques de la région.
-
-**⚠️ Usage interne :** Cette application traite des données confidentielles et est destinée exclusivement aux personnels autorisés du Crous.
+- [À propos de ce projet](#-à-propos-de-ce-projet)
+- [Fonctionnalités](#-fonctionnalités)
+- [Prérequis](#-prérequis)
+- [Installation rapide](#-installation-rapide)
+- [Créer vos données de test](#-créer-vos-données-de-test)
+- [Lancer l'application](#️-lancer-lapplication)
+- [Structure du projet](#-structure-du-projet)
+- [Architecture du code](#-architecture-du-code)
+- [Cas d'usage](#-cas-dusage)
+- [Problèmes ?](#-problèmes-)
+- [Licence](#-licence)
+- [Auteur](#-auteur)
+- [FAQ](#-faq)
 
 ---
 
 ## ✨ Fonctionnalités
 
-### 🗺️ Visualisation cartographique
-- Cartes interactives de la tension par secteur
-- Affichage simultané de la tension brute et réajustée
-- Export des cartes par bassin géographique (ZIP)
+Cette application dispose des fonctionnalités suivantes :
 
-### 📈 Analyses statistiques
-- **Tension brute** : Demandes / Places proposées
-- **Tension réajustée** : Prend en compte les places non réservées et les demandes filtrées
-- Concentration des demandes par secteur/résidence
-- Évolution temporelle sur plusieurs années
+### 🗺️ Visualisation cartographique interactive
+- Cartes avec marqueurs de tension par zone géographique
+- Affichage simultané de plusieurs indicateurs (tension brute/réajustée)
+- Export des visualisations
+  
+### 📈 Tableaux 
+- **Indicateurs de performance** : Taux d'occupation, tension, concentration
+- **Évolution temporelle** : Suivi sur plusieurs années
 
-### 🏠 Indicateurs par niveau
-- **Secteur** : 13 bassins géographiques (Lille, Arras, Valenciennes, etc.)
-- **Résidence** : Analyse détaillée par établissement
-- **Global** : Vue d'ensemble régionale
+### 📊 Graphiques interactifs
+- Graphiques à bulles pour identifier les zones de tension
+- Évolution des demandes vs offre sur le temps
+- Répartition de la population par critères sociaux
 
-### 👥 Population étudiante
-- Répartition des boursiers par échelon social (0 bis à 7)
-- Identification des étudiants non-boursiers et hors barème
-- Graphiques interactifs (donut chart)
-
-### 📥 Exports
-- Tableaux Excel (.xlsx)
-- Graphiques PNG haute résolution
-- Archives ZIP de cartes multiples
-
+### 💾 Exports
+- Tableaux Excel formatés
+- Graphiques PNG 
+- Archives ZIP 
 ---
-
-## 🖼️ Captures d'écran
-
-### Interface principale
-```
-┌─────────────────────────────────────────────────────────┐
-│  🏫 CROUS Lille   Tension des logements étudiants      │
-├─────────────────────────────────────────────────────────┤
-│                                                         │
-│  📂 Fichier Excel  [Choisir un fichier...]              │        
-│  ☑️  Bassins                                            │
-│        ☑ Arras                                          │
-│        ☑ Lille                                          │
-│        ☑ Valenciennes....                               │
-│  📅 Année de gestion                                    │
-│         [2025 ▼]                                        │
-│                                                         │
-│  ┌──────────────────────────────────────────────────┐   │
-│  │  🗺️  Carte de tension par secteur               │   │
-│  │                                                  │   │
-│  │      [Carte interactive avec points colorés]     │   │
-│  │                                                  │   │
-│  └──────────────────────────────────────────────────┘   │
-│                                                         │
-│  📊 Tableau détaillé par secteur                       │
-│  ┌──────────────────────────────────────────────────┐   │
-│  │ Secteur │ Places │ Demandes │ Tension │ ...      │   │
-│  │ Arras   │   450  │   892    │  1.98   │ ...      │   │
-│  └──────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────┘
-```
-
----
-
 ## 🔧 Prérequis
 
-### Logiciels requis
-- **R** >= 4.0.0
-- **RStudio** (recommandé) >= 2022.07.0
+### Logiciels
+- **R** >= 4.0.0 ([Télécharger R](https://cran.r-project.org/))
+- **RStudio** >= 2022.07.0 (optionnel mais recommandé) ([Télécharger RStudio](https://posit.co/download/rstudio-desktop/))
 
-### Packages R nécessaires
+### Packages R
 ```r
-# Visualisation et interface
-shiny (>= 1.7.0)
-bslib
-plotly
-ggplot2
-DT
-
-# Manipulation de données
-dplyr
-tidyr
-stringr
-
-# Cartographie
-sf
-ggrepel
-
-# Import/Export
-readxl
-writexl
-zip
-
-# Autres
-scales
+install.packages(c(
+  # Interface et visualisation
+  "shiny", "bslib", "plotly", "ggplot2", "DT",
+  # Manipulation de données
+  "dplyr", "tidyr", "stringr",
+  # Cartographie
+  "sf", "ggrepel",
+  # Import/Export
+  "readxl", "writexl", "zip",
+  # Utilitaires
+  "scales"
+))
 ```
 
 ---
 
-## 🚀 Installation
+## 🚀 Installation rapide
 
-### 1. Cloner le dépôt
+### 1️⃣ Cloner le projet
 
 ```bash
 git clone https://github.com/JeremLab/tension-logements.git
 cd tension-logements
 ```
 
-### 2. Installer les dépendances R
+### 2️⃣ Installer les dépendances
 
+Ouvrir R ou RStudio et exécuter :
 ```r
-# Installer tous les packages nécessaires
 install.packages(c(
   "shiny", "bslib", "plotly", "ggplot2", "DT",
-  "dplyr", "tidyr", "stringr",
-  "sf", "ggrepel",
-  "readxl", "writexl", "zip",
-  "scales"
+  "dplyr", "tidyr", "stringr", "sf", "ggrepel",
+  "readxl", "writexl", "zip", "scales"
 ))
 ```
 
-### 3. Vérifier les fichiers géographiques
+### 3️⃣ Préparer vos données
 
-Assurez-vous que ces fichiers sont présents dans le répertoire racine :
-- `arrondissements-59-nord.geojson`
-- `arrondissements-62-pas-de-calais.geojson`
+Créez un fichier Excel avec vos données (voir format ci-dessous).
+
+---
+
+## 📊 Créer vos données de test
+
+### ⚠️ IMPORTANT : Aucune donnée réelle fournie
+
+Pour **tester l'application**, vous devez créer votre propre fichier Excel.
+
+### Format du fichier Excel requis
+
+Créez un fichier `.xlsx` avec ces colonnes :
+
+| Colonne | Type | Description | Exemple |
+|---------|------|-------------|---------|
+| `Année de gestion` | Texte | Période d'analyse | "2025" |
+| `Secteur` | Texte | Zone géographique | "Zone A", "Zone B" |
+| `Résidence` | Texte | Nom de l'établissement | "Résidence Alpha" |
+| `INE` | Texte | Identifiant unique (anonymisé) | "ID001", "ID002" |
+| `Nombre logement` | Nombre | Capacité totale | 450 |
+| `Places Total` | Nombre | Places proposées | 420 |
+| `Places phase complémentaire` | Nombre | Places restantes | 35 |
+| `Renouvellement confirmé` | Nombre | Renouvellements | 12 |
+| `Echelon social` | Texte | Catégorie sociale | "0 bis" à "7", "Hors Barème" |
+| `Sous-phase (Libellé)` | Texte | Phase d'attribution | "Tour 1", "Tour 2", etc. |
+| `Latitude` | Nombre | Coordonnée GPS du secteur | 50.6292 |
+| `Longitude` | Nombre | Coordonnée GPS du secteur | 3.0573 |
+
+### 💾 Exemple de données de test
+
+Vous pouvez créer un petit jeu de test comme ceci :
+
+```
+| Année de gestion | Secteur  | Résidence         | INE     | Nombre logement | Places Total | ... | Latitude | Longitude |
+|------------------|----------|-------------------|---------|-----------------|--------------|-----|----------|-----------|
+| 2024-2025        | Zone A   | Résidence Alpha   | ID001   | 450             | 420          | ... | 50.6292  | 3.0573    |
+| 2024-2025        | Zone A   | Résidence Alpha   | ID002   | 450             | 420          | ... | 50.6292  | 3.0573    |
+| 2024-2025        | Zone B   | Résidence Beta    | ID003   | 200             | 185          | ... | 50.2919  | 2.7778    |
+| 2024-2025        | Zone B   | Résidence Beta    | ID004   | 200             | 185          | ... | 50.2919  | 2.7778    |
+| 2023-2024        | Zone A   | Résidence Alpha   | ID005   | 450             | 410          | ... | 50.6292  | 3.0573    |
+```
+
+**Information :**
+- Chaque ligne = 1 demande d'un étudiant
+- Un étudiant peut avoir plusieurs lignes s'il fait plusieurs demandes
+- Les coordonnées sont identiques pour toutes les lignes d'un même secteur
+
+---
+
+## ▶️ Lancer l'application
+
+1. Ouvrir `app.R` dans RStudio
+2. Cliquer sur **"Run App"** (bouton vert ▶️)
+
+### Utilisation
+
+1. **📂 Importer** votre fichier Excel
+2. **🎯 Sélectionner** les filtres (zones, année)
+3. **📊 Explorer** les différents onglets
+4. **💾 Exporter** vos résultats
 
 ---
 
@@ -172,80 +179,23 @@ Assurez-vous que ces fichiers sont présents dans le répertoire racine :
 ```
 tension-logements-crous/
 │
-├── app.R                                    # Application Shiny principale (~1000 lignes)
+├── app.R                                    # Application Shiny
 ├── README.md                                # Ce fichier
 ├── LICENSE                                  # Licence MIT
-│
-├── arrondissements-59-nord.geojson         # Carte département Nord
+├── arrondissements-59-nord.geojson          # Carte département Nord
 ├── arrondissements-62-pas-de-calais.geojson # Carte Pas-de-Calais
-│── logo-crous.png
+├── altitude/longitude secteurs              # Fichier des coordonées GPS des secteurs
+│
+└── data/                                    # Vos données (à créer)
 ```
 
----
-
-## 💻 Utilisation
-
-### Démarrage de l'application
-
-1. Ouvrir `app.R` dans RStudio
-2. Cliquer sur **"Run App"** (bouton vert en haut à droite)
-
-### Workflow d'utilisation
-
-1. **📂 Importer les données**
-   - Cliquer sur "Télécharger un fichier Excel"
-   - Sélectionner le fichier de données du Crous (.xlsx)
-
-2. **🎯 Sélectionner les filtres**
-   - Choisir les bassins géographiques à analyser
-   - Sélectionner l'année universitaire
-
-3. **📊 Explorer les onglets**
-   - **Accueil** : Documentation et mode d'emploi
-   - **Secteur** : Cartes et tableaux par secteur
-   - **Résidence** : Analyse détaillée par résidence
-   - **Global** : Évolution sur plusieurs années
-   - **Population** : Répartition des boursiers
-   - **Glossaire** : Définitions des indicateurs
-
-4. **💾 Exporter les résultats**
-   - Télécharger les cartes (PNG)
-   - Exporter les tableaux (Excel)
-   - Télécharger toutes les cartes (ZIP)
+**📝 Note** : Les fichiers GeoJSON et altidutes fournis sont pour le Nord-Pas de Calais. Si vous testez avec une autre région, téléchargez les fichiers correspondants sur [France geojson](https://france-geojson.gregoiredavid.fr/)
 
 ---
 
-## 📊 Format des données
+## 🔬 Architecture du code
 
-### Colonnes Excel requises
-
-Le fichier Excel importé doit contenir les colonnes suivantes :
-
-| Colonne | Type | Description | Obligatoire |
-|---------|------|-------------|-------------|
-| `Année de gestion` | Texte | Ex: "2024-2025" | ✅ |
-| `Secteur` | Texte | Bassin géographique | ✅ |
-| `Résidence` | Texte | Nom de la résidence | ✅ |
-| `INE` | Texte | Identifiant étudiant | ✅ |
-| `Nombre logement` | Numérique | Capacité totale | ✅ |
-| `Places Total` | Numérique | Places proposées | ✅ |
-| `Places phase complémentaire` | Numérique | Places non réservées | ✅ |
-| `Renouvellement confirmé` | Numérique | Renouvellements | ✅ |
-| `Echelon social` | Texte | Échelon boursier (0 bis à 7) | ✅ |
-| `Sous-phase (Libellé)` | Texte | Tour d'attribution | ✅ |
-| `Latitude` | Numérique | Coordonnées GPS | ✅ |
-| `Longitude` | Numérique | Coordonnées GPS | ✅ |
-| `Places Tour 1`, `Places Tour 2`, etc. | Numérique | Places par tour | ⚠️ |
-
-⚠️ **Important :** Ne jamais inclure de données nominatives dans les exports !
-
----
-
-## 🔬 Optimisations techniques
-
-### Architecture du code
-
-Le code comporte ~1000 lignes** :
+Le code comporte ~1000 lignes :
 
 #### 1. Fonctions génériques réutilisables
 ```r
@@ -270,6 +220,7 @@ calculer_tension_complete() {
 tension_secteur <- reactive({
   calculer_tension_complete(data(), c("Année de gestion", "Secteur"))
 })
+# Calculé 1 fois, réutilisé partout
 ```
 
 #### 4. Paramètres dynamiques
@@ -277,14 +228,6 @@ tension_secteur <- reactive({
 # S'adapte automatiquement au niveau d'agrégation
 group_by(across(all_of(groupe_vars)))
 ```
-
-### Performances
-
-- ✅ **Calculs optimisés** : Pas de duplication
-- ✅ **Réactivité Shiny** : Mise à jour intelligente
-- ✅ **Mémoire** : Gestion efficace des données
-- ✅ **Chargement** : Limite de 50 MB
-
 ---
 
 ## 📈 Indicateurs calculés
@@ -312,24 +255,45 @@ Concentration secteur (%) = (Demandes secteur / Demandes totales) × 100
 (%) du parc = (Renouvellements confirmés / Logements totaux) × 100
 ```
 
+## 🎓 Cas d'usage
+
+### Ce que vous pouvez faire avec
+
+- 📊 Tester avec vos propres données
+- 🔧 Adapter à votre contexte spécifique
+- 🎨 Personnaliser l'interface
+- 🚀 Déployer en interne
+
 ---
 
-## 🐛 Signaler un bug
+## 🐛 Problèmes ?
 
-Si vous rencontrez un problème :
+### Erreurs fréquentes
 
-1. Vérifier qu'il n'existe pas déjà dans les [Issues](https://github.com/JeremLab/tension-logements/issues)
-2. Créer une nouvelle issue avec :
-   - Description claire du problème
-   - Étapes de reproduction
-   - Version de R et des packages
-   - Messages d'erreur (si applicable)
+#### "Cannot open file"
+➡️ Vérifiez que votre fichier Excel est bien fermé avant import
 
+#### "Column not found"
+➡️ Vérifiez que toutes les colonnes requises sont présentes dans votre Excel
+
+#### "Error in st_read"
+➡️ Vérifiez que les fichiers GeoJSON sont dans le même dossier que `app.R`
+
+### Besoin d'aide ?
+
+- 🐙 **Issues GitHub** : [Ouvrir une issue](https://github.com/JeremLab/tension-logements/issues)
 ---
 
 ## 📜 Licence
 
-Ce projet est sous licence **MIT** - voir le fichier [LICENSE](LICENSE) pour plus de détails.
+Ce projet est sous licence **MIT** - voir le fichier [LICENSE](LICENSE).
+
+**En résumé :**
+- ✅ **Utilisation libre**
+- ✅ **Modification autorisée**
+- ✅ **Distribution autorisée**
+- ✅ **Attribution requise** (mentionnez l'auteur original)
+- ❌ **Aucune garantie**
 
 ```
 MIT License
@@ -338,7 +302,9 @@ Copyright (c) 2025 Jérémie Dupont - Crous Lille Nord-Pas de Calais
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction...
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software...
 ```
 
 ---
@@ -346,63 +312,83 @@ in the Software without restriction...
 ## 👤 Auteur
 
 **Jérémie Dupont**  
+🎓 Développé dans le cadre d'un stage au Crous Lille Nord-Pas de Calais  
 📧 Email : jeremie.dupont@crous-lille.fr  
-🏢 Organisation : Crous Lille Nord-Pas de Calais  
-💼 LinkedIn : [jeremie-dupont](https://linkedin.com/in/jeremie-dupont)  
-🐙 GitHub : [@JeremLab](https://github.com/JeremLab)
+🐙 GitHub : [@JeremLab](https://github.com/JeremLab)  
 
 ---
 
 ## 🙏 Remerciements
 
-- **Crous Lille Nord-Pas de Calais** pour l'opportunité de développer cet outil
-- **Équipe logement** pour les retours et tests utilisateurs
-- **Communauté R/Shiny** pour les packages open-source
+- **Crous Lille Nord-Pas de Calais** pour l'opportunité de développer ce projet
+- **Communauté R/Shiny** pour les excellents packages open-source
+- **Vous** qui testez cette application !
 
 ---
 
-## 📚 Ressources
+## 📚 Ressources utiles
 
 ### Documentation
-- [Shiny by RStudio](https://shiny.rstudio.com/)
-- [dplyr Documentation](https://dplyr.tidyverse.org/)
-- [ggplot2 Documentation](https://ggplot2.tidyverse.org/)
+- [📖 Shiny Documentation](https://shiny.rstudio.com/)
+- [📊 dplyr](https://dplyr.tidyverse.org/)
+- [🗺️ sf Package](https://r-spatial.github.io/sf/)
 
-### Guides utiles
-- [Shiny Best Practices](https://github.com/daattali/advanced-shiny)
-- [R for Data Science](https://r4ds.had.co.nz/)
-- [Mastering Shiny](https://mastering-shiny.org/)
+### Tutoriels
+- [🎓 Mastering Shiny](https://mastering-shiny.org/) (gratuit)
+- [📘 R for Data Science](https://r4ds.had.co.nz/)
+- [💡 Shiny Best Practices](https://github.com/daattali/advanced-shiny)
 
 ---
 
-## 📝 Changelog
+### 📝 Changelog
 
 ### Version 1.0.0 (2025-01-16)
-- ✨ Version initiale
-- 🗺️ Cartes interactives par secteur
-- 📊 Tableaux d'analyse détaillés
-- 📈 Graphiques d'évolution temporelle
-- 👥 Analyse de la population boursière
-- 💾 Exports multiples (Excel, PNG, ZIP)
-- ⚡ Code optimisé (-64% de lignes)
+- ✨ Publication initiale
+- 🗺️ Cartes interactives
+- 📊 Tableaux d'analyse
+- 📈 Graphiques temporels
+- 👥 Analyse démographique
+- 💾 Exports multiples
+- ⚡ Code optimisé (-64%)
 
 ---
 
-## 🔮 Roadmap
+### 🔮 Roadmap
 
 ### Fonctionnalités futures envisagées
-- [ ] 🔐 Authentification utilisateurs
-- [ ] 📊 Dashboard temps réel
-- [ ] 🌍 Extension à d'autres Crous
+- 📱 Version responsive mobile
+- 🔐 Authentification utilisateurs
+- 🌍 Extension à d'autres Crous
+
+## ❓ FAQ
+
+### Puis-je utiliser ce code pour mon projet ?
+**Oui !** C'est libre et gratuit (licence MIT). Adaptez-le à vos besoins.
+
+### Où sont les données ?
+**Non fournies.** Créez votre propre fichier Excel avec le format indiqué ci-dessus.
+
+### Ça fonctionne avec mes données ?
+**Oui**, tant qu'elles respectent le format Excel requis. Testez avec un petit échantillon d'abord.
+
+### Puis-je modifier le code ?
+**Absolument !** C'est même encouragé. La licence MIT vous autorise toutes modifications.
+
+### Comment obtenir de l'aide ?
+Ouvrez une [issue GitHub](https://github.com/JeremLab/tension-logements/issues) ou contactez-moi par email.
+
+### L'application fonctionne-t-elle hors ligne ?
+**Oui**, une fois les packages installés, tout fonctionne en local sans connexion internet.
 
 ---
 
 <div align="center">
 
-**Développé pour le Crous Lille Nord-Pas de Calais**
-
 ![R](https://img.shields.io/badge/Made%20with-R-276DC3?logo=r&logoColor=white)
 ![Shiny](https://img.shields.io/badge/Powered%20by-Shiny-2C8EBB?logo=rstudio&logoColor=white)
 
+---
+
+**Code libre • Testez avec vos données • Adaptez à vos besoins**
 
 </div>
