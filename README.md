@@ -128,16 +128,28 @@ Créez un fichier `.xlsx` avec ces colonnes :
 |---------|------|-------------|---------|
 | `Année de gestion` | Texte | Période d'analyse | "2025" |
 | `Secteur` | Texte | Zone géographique | "Zone A", "Zone B" |
-| `Résidence` | Texte | Nom de l'établissement | "Résidence Alpha" |
+| `Sous-phase (Libellé)` | Texte | Phase du tour | "Tour 1", "Tour 2" |
 | `INE` | Texte | Identifiant unique (anonymisé) | "ID001", "ID002" |
-| `Nombre logement` | Nombre | Capacité totale | 450 |
+| `Résidence` | Texte | Nom de l'établissement | "Résidence Alpha" |
+| `Places Tour X` | Nombre | Places proposées à ce tour | 420 |
 | `Places Total` | Nombre | Places proposées | 420 |
+| `Nombre logement` | Nombre | Capacité totale | 450 |
 | `Places phase complémentaire` | Nombre | Places restantes | 35 |
-| `Renouvellement confirmé` | Nombre | Renouvellements | 12 |
+| `Demandes renouvellement` | Nombre | Nombre de demandes de renouvellements | 69 |
+| `Renouvellements confirmés` | Nombre | Renouvellements acceptés | 47 |
+| `Taux d'acceptation` | Nombre |Renouvellements confirmés/demandes | 68,12 |
 | `Echelon social` | Texte | Catégorie sociale | "0 bis" à "7", "Hors Barème" |
 | `Sous-phase (Libellé)` | Texte | Phase d'attribution | "Tour 1", "Tour 2", etc. |
 | `Latitude` | Nombre | Coordonnée GPS du secteur | 50.6292 |
 | `Longitude` | Nombre | Coordonnée GPS du secteur | 3.0573 |
+
+Note `Places Tour X` : pour chaque Sous-phase (Libellé), mettez le nombre de réservation pour le Tour correspondant et appliquer 0 pour les autres Places Tour
+Exemple :	
+
+| Sous-phase (Libellé) | Places Tour 1 | Places Tour 2 | Résidence |
+|---------|------|-------------|---------|
+| Tour 1 | 25 | 0 | X |
+| Tour 2 | 0 | 25 | X |
 
 ### 💾 Exemple de données de test
 
@@ -184,18 +196,18 @@ tension-logements/
 ├── LICENSE                                  # Licence MIT
 ├── arrondissements-59-nord.geojson          # Carte département Nord
 ├── arrondissements-62-pas-de-calais.geojson # Carte Pas-de-Calais
-├── altitude/longitude secteurs              # Fichier des coordonées GPS des secteurs
+├── Latitude_Longitude                       # Fichier des coordonées GPS des secteurs
 │
 └── data/                                    # Vos données (à créer)
 ```
 
-**📝 Note** : Les fichiers GeoJSON et altidutes fournis sont pour le Nord-Pas de Calais. Si vous testez avec une autre région, téléchargez les fichiers correspondants sur [France geojson](https://france-geojson.gregoiredavid.fr/)
+**📝 Note** : Les fichiers GeoJSON et altidutes fournis sont pour le Nord-Pas de Calais. Si vous testez avec une autre région, téléchargez les fichiers correspondants sur [France GeoJson](https://france-geojson.gregoiredavid.fr/)
 
 ---
 
 ## 🔬 Architecture du code
 
-Le code comporte ~1000 lignes :
+Le code comporte ~1300 lignes :
 
 #### 1. Fonctions génériques réutilisables
 ```r
