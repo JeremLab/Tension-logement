@@ -144,6 +144,7 @@ Créez un fichier `.xlsx` avec ces colonnes :
 | `Longitude` | Nombre | Coordonnée GPS du secteur | 3.0573 |
 
 Note `Places Tour X` : pour chaque Sous-phase (Libellé), mettez le nombre de réservation pour le Tour correspondant et appliquer 0 pour les autres Places Tour
+
 Exemple :	
 
 | Sous-phase (Libellé) | Places Tour 1 | Places Tour 2 | Résidence |
