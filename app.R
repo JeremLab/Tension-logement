@@ -266,6 +266,8 @@ generer_tableau_final <- function(data, tension, renouvellement, solde, filtres_
 
   # Vérification des données d'entrée
   req(tension, renouvellement, solde)
+  
+  places_total <- calculer_places(data, "total", groupe_vars)
 
   # Construction progressive
   result <- data %>%
@@ -284,10 +286,11 @@ generer_tableau_final <- function(data, tension, renouvellement, solde, filtres_
     summarise(Total_Voeux = n(), .groups = "drop") %>%
     group_by(across(all_of(groupe_vars))) %>%
     summarise(Total_Distinct_INE = n_distinct(INE), .groups = "drop")
-
+  
   # Jointures progressives
   if (nrow(result) > 0) {
     result <- result %>%
+      left_join(places_total, by = groupe_vars) %>%
       left_join(tension, by = groupe_vars) %>%
       left_join(renouvellement, by = groupe_vars) %>%
       left_join(solde, by = groupe_vars)
